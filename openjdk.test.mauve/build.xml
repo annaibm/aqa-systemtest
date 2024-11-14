@@ -111,8 +111,6 @@ limitations under the License.
 		<javac srcdir="${openjdk_test_mauve_src_dir}"
 			   destdir="${openjdk_test_mauve_src_dir}"
 			   release="8"
-			   source="1.8"
-			   target="1.8"
 			   fork="true"
 			   executable="${java_compiler}"
 			   classpathref="project.class.path"
@@ -123,8 +121,8 @@ limitations under the License.
 			<include name="**/*.java" />
 			<exclude name="*.java" />
 			<exclude name="**/junit/framework/*.java" />
-			<exclude name="/junit/runner/*.java" />
-			<exclude name="/junit/textui/*.java" />
+			<exclude name="**/junit/runner/*.java" />
+			<exclude name="**/junit/textui/*.java" />
 			<exclude name="**/gnu/testlet/java/lang/Class/classInfo/getDeclaredMethod.java" />
 		</javac>
 		<!-- The file gnu/testlet/java/lang/Class/classInfo/getDeclaredMethod.java is built with

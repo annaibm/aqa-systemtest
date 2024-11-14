@@ -111,6 +111,8 @@ limitations under the License.
 		<javac srcdir="${openjdk_test_mauve_src_dir}"
 			   destdir="${openjdk_test_mauve_src_dir}"
 			   release="8"
+			   source="1.8"
+			   target="1.8"
 			   fork="true"
 			   executable="${java_compiler}"
 			   classpathref="project.class.path"

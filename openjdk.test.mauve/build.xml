@@ -123,8 +123,8 @@ limitations under the License.
 			<include name="**/*.java" />
 			<exclude name="*.java" />
 			<exclude name="**/junit/framework/*.java" />
-			<exclude name="/junit/runner/*.java" />
-			<exclude name="/junit/textui/*.java" />
+			<exclude name="**/junit/runner/*.java" />
+			<exclude name="**/junit/textui/*.java" />
 			<exclude name="**/gnu/testlet/java/lang/Class/classInfo/getDeclaredMethod.java" />
 		</javac>
 		<!-- The file gnu/testlet/java/lang/Class/classInfo/getDeclaredMethod.java is built with

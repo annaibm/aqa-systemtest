@@ -189,11 +189,6 @@ limitations under the License.
 		        includes="**/*.properties" />
 		</copy>
 		
-		<copy todir="${openjdk_test_modularity_bin_dir}/tests/com.test.jlink/conf">
-			<fileset dir="${openjdk_test_modularity_src_dir}/tests/com.test.jlink/conf"
-				includes="**/*.properties" />
-		</copy>
-
 		<apply executable="${java_compiler}" failonerror="true" parallel="true">
 			<arg value="-d" />
 			<arg value="${openjdk_test_modularity_bin_dir}/common" />

@@ -95,7 +95,7 @@ limitations under the License.
 		<echo message="can_build_modularity_natives_windows is ${can_build_modularity_natives_windows}"/>
 	</target>
 	
-	<target name="build-no-natives" depends="check-prereqs, check-compiler-level, build-java, build-javah">
+	<target name="build-no-natives" depends="check-prereqs, check-compiler-level, build-java">
 	</target>
 
 	<target name="build-java" depends="check-prereqs, create-bin-dir" if="${can_build_modularity}">

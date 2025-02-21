@@ -262,30 +262,36 @@ limitations under the License.
 	</target>
 	
 	<target name="build-javah" depends="check-prereqs, check-if-javac_ran" unless="javac_did_not_run">
-		<!-- Build JNI header files. -->
-		<!--From Java10, the 'javah' executable has been replaced with 'javac with options'. -->
-		
-		<property name="openjdk_test_modularity_javah_src" value="${openjdk_test_modularity_src_dir}/tests/com.test.jlink/adoptopenjdk/test/modularity/jlink/JniTest.java"/>
-		<property name="openjdk_test_modularity_headerdir" value="${openjdk_test_modularity_jlink_nativedir}/lib"/>
-		<mkdir dir="${openjdk_test_modularity_headerdir}" />
-		 
-		<!-- First delete the header file -->
-		<delete includeemptydirs="true" verbose="true">
-			<fileset dir="${openjdk_test_modularity_headerdir}" includes="adoptopenjdk_test_modularity_jlink_JniTest.h"/>
-		</delete>
-		
-		<!-- Then recreate it -->
-		<echo message="Building JNI header file for JniTest to ${openjdk_test_modularity_headerdir}" />
-		<exec executable="${java_compiler}" failonerror="true">
-			<arg value="-classpath"/>
-			<arg pathref="jlink.project.class.path" />
-			<arg value="-h"/>
-			<arg value="${openjdk_test_modularity_headerdir}"/>
-			<arg value="-d"/>
-			<arg value="${openjdk_test_modularity_bin_dir}"/>
-			<arg value="${openjdk_test_modularity_javah_src}"/>
-		</exec>
-	</target>
+        <!-- Check if JniTest.java exists -->
+        <available file="${openjdk_test_modularity_javah_src}" property="jni.test.exists" />
+        
+        <!-- Only execute if the file exists -->
+        <condition property="build.javah.enabled" value="true">
+            <isset property="jni.test.exists" />
+        </condition>
+        
+        <echo message="Skipping JNI header build because JniTest.java does not exist" unless="build.javah.enabled"/>
+        
+        <target name="build-javah" if="build.javah.enabled">
+            <!-- Build JNI header files -->
+            <mkdir dir="${openjdk_test_modularity_headerdir}" />
+            <delete includeemptydirs="true" verbose="true">
+                <fileset dir="${openjdk_test_modularity_headerdir}" includes="adoptopenjdk_test_modularity_jlink_JniTest.h"/>
+            </delete>
+            
+            <echo message="Building JNI header file for JniTest to ${openjdk_test_modularity_headerdir}" />
+            <exec executable="${java_compiler}" failonerror="true">
+                <arg value="-classpath"/>
+                <arg pathref="jlink.project.class.path" />
+                <arg value="-h"/>
+                <arg value="${openjdk_test_modularity_headerdir}"/>
+                <arg value="-d"/>
+                <arg value="${openjdk_test_modularity_bin_dir}"/>
+                <arg value="${openjdk_test_modularity_javah_src}"/>
+            </exec>
+        </target>
+    </target>
+
 	
 	<target name="build-natives" depends="check-prereqs, check-compiler-level, setup-native-build-command, build-natives-windows, build-natives-unix">
 	</target>

@@ -129,7 +129,8 @@ public class ClassMapHog
 							// The java.applet has been removed from jdk 26
 							if (classToLoad.startsWith("java.applet") || 
 							classToLoad.startsWith("java.beans.AppletInitializer")) {
-								continue;			
+								continue;	
+							}
 						}
 						// get the class loader to load the current class
 						// Class is the class that represents a classes 'blueprint'
